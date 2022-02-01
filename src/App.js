@@ -1,50 +1,36 @@
 import React, { Component } from "react"
-import logo from "./logo.svg"
 import "./App.css"
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
+import * as THREE from "three";
+
+
+export default class App extends Component {
+  componentDidMount() {
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      this.mount.appendChild( renderer.domElement );
+    
+      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      var material = new THREE.MeshStandardMaterial( { color: 0x7e31eb } );
+      var cube = new THREE.Mesh( geometry, material );
+      scene.add( cube );
+      const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+      scene.add( light );
+camera.position.z = 2;
+var animate = function () {
+          requestAnimationFrame( animate );
+          cube.rotation.x += 0.01;
+          cube.rotation.y += 0.01;
+          cube.rotation.z += 0.01;
+          renderer.render( scene, camera );
+      };
+      animate();
   }
-
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
-
   render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
+      return (
+          <div ref={ref => (this.mount = ref)} />
+      )
   }
 }
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
-
-export default App
