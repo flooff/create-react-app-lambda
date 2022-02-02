@@ -1,32 +1,111 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #10002b;
+  transition: 0.4s ease-in-out;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.scrollArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+header {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  padding: 60px;
+}
+header .header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .header-inner .logo >img {
+  /* font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 1,5rem;
+  color: #fff; */
+  height: 90px;
+
+}
+header .header-inner nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+header .header-inner nav ul li {
+  list-style: none;
+  margin: 0 60px;
+}
+header .header-inner nav ul li.btn a {
+  color: #fff;
+  font-weight: 600;
+  background: #23232a;
+  padding: 16px 24px;
+  border-radius: 10px;
+}
+header .header-inner nav ul li a {
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #fff;
+}
+.title {
+  font-size: 10rem;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
+}
+.title span {
+  display: block;
+}
+@media (max-width: 1440px) {
+  .title {
+    font-size: 6rem;
+ }
+}
+.loading {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: #171717;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.loading-bar-container {
+  width: 100px;
+  height: 32px;
+  background: #272727;
+}
+.loading-bar {
+  height: 32px;
+  background: #f15946;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
